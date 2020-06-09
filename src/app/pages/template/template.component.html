@@ -1,0 +1,69 @@
+<h4>Formularios <small> template </small></h4>
+<hr />
+<form
+  autocomplete="off"
+  (ngSubmit)="guardar(templateForm)"
+  #templateForm="ngForm"
+>
+  <div>
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Nombre</label>
+      <div class="col-8">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Nombre"
+          name="nombre"
+          [class.is-invalid]="nombre.invalid && nombre.touched"
+          #nombre="ngModel"
+          [ngModel]="usuario.nombre"
+          required
+          minlength="5"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">Apellido</label>
+      <div class="col-8">
+        <input
+          class="form-control"
+          name="apellido"
+          [class.is-invalid]="apellido.invalid && apellido.touched"
+          #apellido="ngModel"
+          [ngModel]="usuario.apellido"
+          type="text"
+          placeholder="Apellido"
+          minlength="5"
+          required
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Correo</label>
+    <div class="col-8">
+      <input
+        class="form-control"
+        type="email"
+        [class.is-invalid]="correo.invalid && correo.touched"
+        placeholder="Correo electrónico"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2-3}$"
+        [ngModel]="usuario.correo"
+        #correo="ngModel"
+        name="correo"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col-md-8">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>

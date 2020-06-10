@@ -52,6 +52,16 @@ export class ReactiveComponent implements OnInit {
     );
   }
 
+  public get pass1NoValido() {
+    return this.forma.get('pass1').invalid && this.forma.get('pass1').touched;
+  }
+
+  public get pass2NoValido() {
+    const pass1 = this.forma.get('pass1').value;
+    const pass2 = this.forma.get('pass2').value;
+    return pass1 === pass2 ? false : true;
+  }
+
   crearFormulario() {
     this.forma = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(5)]],
@@ -60,10 +70,15 @@ export class ReactiveComponent implements OnInit {
         '',
         // Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2-3}$'),
       ],
-      direccion: this.formBuilder.group({
-        distrito: ['', Validators.required],
-        ciudad: ['', Validators.required],
-      }),
+      pass1: ['', Validators.required],
+      pass2: ['', Validators.required],
+      direccion: this.formBuilder.group(
+        {
+          distrito: ['', Validators.required],
+          ciudad: ['', Validators.required],
+        },
+        { validators: this._validadores.passwordsIguales('pass1', 'pass2') }
+      ),
       pasatiempos: this.formBuilder.array([]),
     });
   }

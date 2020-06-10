@@ -11,7 +11,7 @@ export class ReactiveComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.crearFormulario();
-    // this.cargarData();
+    this.cargarData();
   }
 
   ngOnInit(): void {}
@@ -60,8 +60,16 @@ export class ReactiveComponent implements OnInit {
         distrito: ['', Validators.required],
         ciudad: ['', Validators.required],
       }),
-      pasatiempos: this.formBuilder.array([[], [], [], [], []]),
+      pasatiempos: this.formBuilder.array([]),
     });
+  }
+
+  agregarPasatiempo() {
+    this.pasatiempos.push(this.formBuilder.control('', Validators.required));
+  }
+
+  borrarPasatiempo(i: number) {
+    this.pasatiempos.removeAt(i);
   }
 
   guardar() {
@@ -79,12 +87,6 @@ export class ReactiveComponent implements OnInit {
 
     //posteo de la informacion
     this.forma.reset({
-      nombre: '',
-    });
-  }
-
-  cargarData() {
-    this.forma.setValue({
       nombre: 'Juancho',
       apellido: 'Perez',
       correo: 'juanperz123@gmail.com',
@@ -93,5 +95,21 @@ export class ReactiveComponent implements OnInit {
         ciudad: 'Otawa',
       },
     });
+  }
+
+  cargarData() {
+    this.forma.reset({
+      nombre: 'Juancho',
+      apellido: 'Perez',
+      correo: 'juanperz123@gmail.com',
+      direccion: {
+        distrito: 'Otario',
+        ciudad: 'Otawa',
+      },
+    });
+    //insertar al arreglo de forma dinamica
+    ['Comer', 'Dormir'].forEach((valor) =>
+      this.pasatiempos.push(this.formBuilder.control(valor))
+    );
   }
 }

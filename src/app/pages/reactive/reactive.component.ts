@@ -38,6 +38,12 @@ export class ReactiveComponent implements OnInit {
     return this.forma.get('correo').invalid && this.forma.get('correo').touched;
   }
 
+  public get usuarioNoValido() {
+    return (
+      this.forma.get('usuario').invalid && this.forma.get('usuario').touched
+    );
+  }
+
   public get distritoNoValido() {
     return (
       this.forma.get('direccion.distrito').invalid &&
@@ -63,24 +69,25 @@ export class ReactiveComponent implements OnInit {
   }
 
   crearFormulario() {
-    this.forma = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.minLength(5)]],
-      apellido: ['', [Validators.required, this._validadores.noHerrera]],
-      correo: [
-        '',
-        // Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2-3}$'),
-      ],
-      pass1: ['', Validators.required],
-      pass2: ['', Validators.required],
-      direccion: this.formBuilder.group(
-        {
+    this.forma = this.formBuilder.group(
+      {
+        nombre: ['', [Validators.required, Validators.minLength(5)]],
+        apellido: ['', [Validators.required, this._validadores.noHerrera]],
+        correo: [
+          '',
+          // Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2-3}$'),
+        ],
+        usuario: ['', , this._validadores.existeUsuario],
+        pass1: ['', Validators.required],
+        pass2: ['', Validators.required],
+        direccion: this.formBuilder.group({
           distrito: ['', Validators.required],
           ciudad: ['', Validators.required],
-        },
-        { validators: this._validadores.passwordsIguales('pass1', 'pass2') }
-      ),
-      pasatiempos: this.formBuilder.array([]),
-    });
+        }),
+        pasatiempos: this.formBuilder.array([]),
+      },
+      { validators: this._validadores.passwordsIguales('pass1', 'pass2') }
+    );
   }
 
   agregarPasatiempo() {

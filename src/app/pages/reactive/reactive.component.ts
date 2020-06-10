@@ -16,6 +16,7 @@ export class ReactiveComponent implements OnInit {
   ) {
     this.crearFormulario();
     this.cargarData();
+    this.crearListeners();
   }
 
   ngOnInit(): void {}
@@ -88,6 +89,15 @@ export class ReactiveComponent implements OnInit {
       },
       { validators: this._validadores.passwordsIguales('pass1', 'pass2') }
     );
+  }
+
+  crearListeners() {
+    // listeners de cada cambio en el formulario
+    this.forma.valueChanges.subscribe((valor) => console.log(valor));
+    this.forma.statusChanges.subscribe((status) => console.log(status));
+    this.forma
+      .get('nombre')
+      .valueChanges.subscribe((valor) => console.log(valor));
   }
 
   agregarPasatiempo() {

@@ -1,4 +1,6 @@
 <h4>Formularios <small> Reactivos </small></h4>
+<!-- {{ forma.value | json }} -->
+
 <hr />
 <form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
   <div>
@@ -10,11 +12,7 @@
           formControlName="nombre"
           type="text"
           placeholder="Nombre"
-          [class.is-invalid]="nombreNoValido"
         />
-        <small *ngIf="nombreNoValido" class="text-danger"
-          >Ingrese al menos 5 letras</small
-        >
       </div>
     </div>
 
@@ -25,12 +23,8 @@
           class="form-control"
           formControlName="apellido"
           type="text"
-          [class.is-invalid]="apellidoNoValido"
           placeholder="Apellido"
         />
-        <small *ngIf="apellidoNoValido" class="text-danger"
-          >Campo obligatorio</small
-        >
       </div>
     </div>
   </div>
@@ -41,56 +35,78 @@
       <input
         class="form-control"
         type="email"
-        [class.is-invalid]="correoNoValido"
         formControlName="correo"
         placeholder="Correo electrónico"
       />
-      <small *ngIf="correoNoValido" class="text-danger"
-        >Campo obligatorio</small
-      >
     </div>
   </div>
 
-  <div class="form-group row">
+  <!-- <div [formArrayName]="valor">
+  
+  </div> -->
+
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>ID</th>
+            <th>Pasatiempo</th>
+            <th>Borrar</th>
+          </tr>
+        </thead>
+        <tbody formArrayName="companero">
+          <tr *ngFor="let control of companeros.controls; let i = index">
+            <td>{{ i }}</td>
+            <td>
+              <input type="text" class="form-control" [formControlName]="i" />
+            </td>
+            <td>
+              <button class="btn btn-danger">
+                Borrar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button
+        class="btn btn-primary mt-3 mb-5 btn-block"
+        type="button"
+        (click)="add()"
+      >
+        Agregar
+      </button>
+    </div>
+  </div>
+
+  <button (click)="agregarCompanero()">Agregar</button>
+  <!-- <div class="form-group row">
     <label class="col-2 col-form-label">Usuario</label>
     <div class="col">
       <input
         class="form-control"
         type="email"
-        [class.is-invalid]="usuarioNoValido"
         formControlName="usuario"
         placeholder="Escribe tu usuario"
       />
-      <small *ngIf="usuarioNoValido" class="text-danger"
-        >Ese nombre de usuario ya fue tomado</small
-      >
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Contraseña</label>
     <div class="col">
-      <input
-        class="form-control"
-        type="text"
-        formControlName="pass1"
-        [class.is-invalid]="pass1NoValido"
-      />
+      <input class="form-control" type="text" formControlName="pass1" />
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-2 col-form-label">Repita Contraseña</label>
     <div class="col">
-      <input
-        class="form-control"
-        type="text"
-        formControlName="pass2"
-        [class.is-invalid]="pass2NoValido"
-      />
+      <input class="form-control" type="text" formControlName="pass2" />
     </div>
-  </div>
-
+  </div> -->
+  <!-- 
   <div class="form-group row" formGroupName="direccion">
     <label class="col-2 col-form-label">Direccion</label>
     <div class="form-row col">
@@ -100,7 +116,6 @@
           class="form-control"
           formControlName="distrito"
           placeholder="Distrito"
-          [class.is-invalid]="distritoNoValido"
         />
       </div>
       <div class="col">
@@ -109,7 +124,6 @@
           formControlName="ciudad"
           class="form-control"
           placeholder="Ciudad"
-          [class.is-invalid]="ciudadNoValido"
         />
       </div>
     </div>
@@ -124,8 +138,8 @@
             <th>Pasatiempo</th>
             <th>Acciones</th>
           </tr>
-        </thead>
-        <tbody formArrayName="pasatiempos">
+        </thead> -->
+  <!-- <tbody formArrayName="pasatiempos">
           <tr *ngFor="let control of pasatiempos.controls; let i = index">
             <td>{{ i + 1 }}</td>
             <td>
@@ -137,8 +151,8 @@
               </button>
             </td>
           </tr>
-        </tbody>
-      </table>
+        </tbody> -->
+  <!-- </table>
       <button
         (click)="agregarPasatiempo()"
         class="btn btn-primary mt-3 mb-5 btn-block"
@@ -146,8 +160,8 @@
       >
         Agregar
       </button>
-    </div>
-  </div>
+    </div> -->
+  <!-- </div> -->
 
   <div class="form-group row">
     <label class="col-2 col-form-label">&nbsp;</label>

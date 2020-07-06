@@ -8,8 +8,15 @@ import { ReactiveComponent } from './pages/reactive/reactive.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PracticaComponent } from './practica/practica.component';
 @NgModule({
-  declarations: [AppComponent, TemplateComponent, ReactiveComponent],
+  declarations: [
+    AppComponent,
+    TemplateComponent,
+    ReactiveComponent,
+    PracticaComponent,
+    PracticaComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

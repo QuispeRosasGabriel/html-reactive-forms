@@ -1,0 +1,49 @@
+<form [formGroup]="bancoForm" (ngSubmit)="enviar()">
+  <div>
+    {{ bancoForm.value | json }}
+  </div>
+  <div class="form-group">
+    <label for="">Nombre </label>
+    <br />
+    <input type="text" formControlName="nombre" />
+  </div>
+  <div class="form-group">
+    <label for="">Apellido </label>
+    <br />
+    <input type="text" formControlName="apellido" />
+  </div>
+  <div class="form-group">
+    <label for="">Direccion </label>
+    <br />
+    <input type="text" formControlName="direccion" />
+  </div>
+
+  <div>
+    <div formArrayName="companero">
+      <div
+        *ngFor="let control of companeros.controls; let i = index"
+        class="form-control"
+      >
+        <label>{{ companeros.controls }}</label>
+        <input type="text" class="form-control" [formControlName]="i" />
+      </div>
+    </div>
+
+    <!-- <span>{{ i }}</span> -->
+  </div>
+  <button type="button" (click)="agregarCompanero()">
+    Agregar Compañero
+  </button>
+  <br />
+  <br />
+  <br />
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="input-group col">
+      <button type="submit" class="btn btn-outline-primary btn-block">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
